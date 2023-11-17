@@ -134,7 +134,8 @@ namespace AddLogger
                             sb.Append("\n" + failed);
                             sb.Append("\n" + leading + "{");
                             sb.Append("\n" + leading + "\tLOG4CPLUS_ERROR(logcmps, LOG4CPLUS_TEXT(\"Failed to ");
-                            sb.Append(methodname);
+                            string parsedmethodname = methodname.Replace("\"", "\\\"");
+                            sb.Append(parsedmethodname);
                             sb.Append(" Error: \") << std::hex << hr);");
                             sb.Append("\n" + leading + "\t" + trimmedresult + "\t //Logged");
                             sb.Append("\n" + leading + "}");
@@ -282,8 +283,8 @@ namespace AddLogger
                     if (String.IsNullOrWhiteSpace(method))
                         continue;
 
-                    //if (method.Contains("PDicomDirSelectWnd::OnFileSelect"))
-                    //    Console.WriteLine("");
+                    if (method.Contains("((CRApp::CRExportFormatType)31)"))
+                        Console.WriteLine("");
 
                     string trimmedendmethod = method.TrimEnd(trimmers);
                     string trimmedmethod = method.Trim(trimmers);
@@ -292,7 +293,7 @@ namespace AddLogger
                     if (!trimmedmethod.Contains("::"))
                         continue;
 
-                    if (trimmedmethod.EndsWith(";"))
+                    if (trimmedmethod.EndsWith(";") || trimmedmethod.Contains(";//") || trimmedmethod.Contains("; //"))
                         continue;
 
                     if (trimmedmethod.StartsWith("{"))
