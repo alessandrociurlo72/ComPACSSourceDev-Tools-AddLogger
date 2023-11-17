@@ -283,8 +283,8 @@ namespace AddLogger
                     if (String.IsNullOrWhiteSpace(method))
                         continue;
 
-                    if (method.Contains("((CRApp::CRExportFormatType)31)"))
-                        Console.WriteLine("");
+                    //if (method.Contains("((CRApp::CRExportFormatType)31)"))
+                    //    Console.WriteLine("");
 
                     string trimmedendmethod = method.TrimEnd(trimmers);
                     string trimmedmethod = method.Trim(trimmers);
